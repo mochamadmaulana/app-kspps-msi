@@ -21,5 +21,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::prefix('kantor')->name('kantor.')->group(function () {
         Route::resource('pusat',KantorPusatController::class)->except('show','create','edit','destroy');
         Route::resource('cabang',KantorCabangController::class)->except('show');
+        Route::post('cabang/cek-admin',[KantorCabangController::class,'cek_admin'])->name('cabang.cek-admin');
+        Route::get('cabang/{id}/admin/create',[KantorCabangController::class,'admin_create'])->name('cabang.admin-create');
+        Route::post('cabang/{id}/admin/create',[KantorCabangController::class,'admin_store'])->name('cabang.admin-store');
     });
 });

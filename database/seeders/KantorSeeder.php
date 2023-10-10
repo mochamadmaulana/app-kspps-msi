@@ -85,26 +85,55 @@ class KantorSeeder extends Seeder
                 'alamat' => 'Kp.Sindang Jaya Ds.sindang Jaya Kec.sindang Jaya',
             ],
             [
-                'nama_kantor' => 'CISOKA',
+                'nama_kantor' => 'TIGARAKSA',
                 'email' => 'kpcmsi010@kopsyahmsi.com',
+                'no_telepone' => '083804946457',
+                'is_pusat' => false,
+                'alamat' => 'Kp. TIGA RAKSA Ds. TIGARAKSA Kec. TIGARAKSA',
+            ],
+            [
+                'nama_kantor' => 'CISOKA',
+                'email' => 'kpcmsi011@kopsyahmsi.com',
                 'no_telepone' => '083804946458',
                 'is_pusat' => false,
                 'alamat' => 'Kp. CISOKA Ds. CISOKA Kec. CISOKA',
             ],
             [
+                'nama_kantor' => 'MAUK',
+                'email' => 'kpcmsi012@kopsyahmsi.com',
+                'no_telepone' => '083804946458',
+                'is_pusat' => false,
+                'alamat' => 'Kp. MAUK',
+            ],
+            [
+                'nama_kantor' => 'PANONGAN',
+                'email' => 'kpcmsi013@kopsyahmsi.com',
+                'no_telepone' => '083804946458',
+                'is_pusat' => false,
+                'alamat' => 'Kp. PANONGAN',
+            ],
+            [
+                'nama_kantor' => 'KRONJO',
+                'email' => 'kpcmsi014@kopsyahmsi.com',
+                'no_telepone' => '083804946458',
+                'is_pusat' => false,
+                'alamat' => 'Kp. KRONJO',
+            ],
+            [
+                'nama_kantor' => 'SOLEAR',
+                'email' => 'kpcmsi015@kopsyahmsi.com',
+                'no_telepone' => '083804946458',
+                'is_pusat' => false,
+                'alamat' => 'Kp. SOLEAR',
+            ],
+            [
                 'nama_kantor' => 'KERESEK',
-                'email' => 'kpcmsi011@kopsyahmsi.com',
+                'email' => 'kpcmsi016@kopsyahmsi.com',
                 'no_telepone' => '081314697612',
                 'is_pusat' => false,
                 'alamat' => 'Kp.KRESEK Ds.Kresek Kec. Kresek',
             ],
-            [
-                'nama_kantor' => 'TIGARAKSA',
-                'email' => 'kpcmsi012@kopsyahmsi.com',
-                'no_telepone' => '083804946457',
-                'is_pusat' => false,
-                'alamat' => 'Kp. TIGA RAKSA Ds. TIGARAKSA Kec. TIGARAKSA',
-            ],
+
         ];
         for ($i=0; $i < count($data_kantor); $i++) {
             Kantor::create([

@@ -1,11 +1,20 @@
 @extends('layouts.admin', ['title' => 'Kantor Cabang','icon' => 'fas fa-building'])
 
 @section('content')
+@if (session()->has('success'))
+<div class="callout callout-success">
+    <h5><i class="fas fa-check mr-1"></i> {{ session('success') }}</h5>
+    <span>No. Induk Karyawan : <b><i>{{ session('nik_karyawan') }}</i></b></span>
+    <span>Nama Admin : <b><i>{{ session('nama_karyawan') }}</i></b></span>
+    <span>Kantor : <b><i>{{ session('nama_kantor') }}</i></b></span>
+</div>
+@endif
 <div class="row mb-5">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
                 <a href="{{ route('admin.kantor.cabang.create') }}" class="btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus mr-1"></i> Tambah Data</a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#ModalTambahAdmin"><i class="fas fa-plus mr-1"></i> Tambah Admin</a>
                 @if (request('search'))
                 <div class="float-right">
                     <a href="{{ route('admin.kantor.cabang.index') }}" class="btn btn-sm btn-warning"><i class="fas fa-sync-alt mr-1"></i> Refresh</a>
@@ -80,3 +89,49 @@
 @push('breadcrumb')
 <li class="breadcrumb-item active">List Data</li>
 @endpush
+
+@if ($cabang->count() > 0)
+@push('modal')
+<!-- Modal Tambah Admin -->
+<div class="modal fade" id="ModalTambahAdmin" aria-labelledby="ModalTambahAdminLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalTambahAdminLabel">Tambah Admin Kantor Cabang</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin.kantor.cabang.cek-admin') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label>Kantor Cabang <span class="text-danger">*</span></label>
+                        <select name="kantor_cabang" class="form-control @error('kantor_cabang') is-invalid @enderror" id="selectKantorCabang">
+                            <option value="">- pilih -</option>
+                            @foreach ($all_cabang as $val_all_cabang)
+                            <option value="{{ $val_all_cabang->id }}" @if (@old('kantor_cabang') == $val_all_cabang->id) selected @endif>{{ $val_all_cabang->nama_kantor }}</option>
+                            @endforeach
+                        </select>
+                        @error('kantor_cabang')<div class="invalid-feedback">{{ $message }}</span></div>@enderror
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-primary shadow-sm">Lanjutkan</button>
+                    <button type="button" class="btn btn-sm btn-secondary shadow-sm" data-dismiss="modal">Batal</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endpush
+
+@push('js')
+<script>
+$(document).ready(function (e) {
+    $('#selectKantorCabang').select2({
+        theme: 'bootstrap4',
+        // placeholder: '-Pilih-'
+    })
+});
+</script>
+@endpush
+@endif

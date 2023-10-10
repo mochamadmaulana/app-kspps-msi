@@ -128,6 +128,37 @@
                             </a>
                         </li>
 
+                        <!-- Pembiayaan -->
+                        <li class="nav-item {{ Request::segment(2) == 'arsip' ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ Request::segment(2) == 'arsip' ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-hand-holding-usd"></i>
+                                <p>
+                                    Pembiayaan
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link {{ Request::is('admin/arsip/surat-masuk*') ? 'active' : '' }}">
+                                        <i class="far fa-circle text-sm nav-icon"></i>
+                                        <p>Permohonan</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link {{ Request::is('admin/arsip/surat-keluar*') ? 'active' : '' }}">
+                                        <i class="far fa-circle text-sm nav-icon"></i>
+                                        <p>Diterima</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link {{ Request::is('admin/arsip/surat-keluar*') ? 'active' : '' }}">
+                                        <i class="far fa-circle text-sm nav-icon"></i>
+                                        <p>Ditolak</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <!-- Laporan -->
                         <li class="nav-item">
                             <a href="#"
