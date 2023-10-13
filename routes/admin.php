@@ -12,7 +12,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
 
     Route::resource('anggota',AnggotaController::class);
-    Route::post('anggota/{id}/pendaftaran-diterima',[AnggotaController::class,'pendaftaran_diterima'])->name('anggota.pendaftaran-diterima.store');
+    Route::post('anggota/{id}/approve',[AnggotaController::class,'approve'])->name('anggota.approve');
+    Route::post('anggota/{id}/reject',[AnggotaController::class,'reject'])->name('anggota.reject');
 
     Route::resource('karyawan',KaryawanController::class);
     Route::put('karyawan/{id}/edit-password', [KaryawanController::class,'edit_password'])->name('karyawan.edit-password');

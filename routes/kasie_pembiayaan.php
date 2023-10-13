@@ -11,7 +11,6 @@ Route::middleware('auth')->prefix('kasie-pembiayaan')->name('kasie-pembiayaan.')
     Route::get('anggota/create',[AnggotaController::class,'create'])->name('anggota.create');
     Route::post('anggota/store',[AnggotaController::class,'store'])->name('anggota.store');
     Route::get('anggota/{id}/show',[AnggotaController::class,'show'])->name('anggota.show');
-    Route::post('anggota/{id}/approve',[AnggotaController::class,'approve'])->name('anggota.approve');
 
     // Route::prefix('kantor')->name('kantor.')->group(function () {
     // });

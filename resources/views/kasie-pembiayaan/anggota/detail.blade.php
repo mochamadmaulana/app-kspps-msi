@@ -70,9 +70,11 @@
                         <p class="text-muted">{{ $anggota->pendidikan_terakhir }}</p>
                         <hr>
 
+                        @if($anggota->id_penginput != Auth::user()->id)
                         <strong><i class="fas fa-user-tie mr-1"></i> Penginput</strong>
                         <p class="text-muted">{{ $anggota->penginput->nama_lengkap }}</p>
                         <hr>
+                        @endif
                     </div>
                     <div class="col-md-6">
                         <strong><i class="fas fa-praying-hands mr-1"></i> Agama</strong>
@@ -127,7 +129,7 @@
                         <strong><i class="fas fa-file-alt mr-1"></i> Catatan Ditolak</strong>
                         <p class="text-muted">
                             @foreach ($anggota->catatan_pendaftaran_ditolak as $val_cpd)
-                            <i><b>{{ \Carbon\Carbon::parse($val_cpd->tanggal_ditolak)->translatedFormat('d-m-Y'); }} :</b><br>
+                            <i><b>{{ \Carbon\Carbon::parse($val_cpd->tanggal_ditolak)->translatedFormat('d, M Y'); }} :</b><br>
                                 {{ $val_cpd->isi_catatan }}
                             </i><br>
                             @endforeach

@@ -127,7 +127,7 @@
                         <strong><i class="fas fa-file-alt mr-1"></i> Catatan Ditolak</strong>
                         <p class="text-muted">
                             @foreach ($anggota->catatan_pendaftaran_ditolak as $val_cpd)
-                            <i><b>{{ \Carbon\Carbon::parse($val_cpd->tanggal_ditolak)->translatedFormat('d-m-Y'); }} :</b><br>
+                            <i><b>{{ \Carbon\Carbon::parse($val_cpd->tanggal_ditolak)->translatedFormat('d, M Y'); }} :</b><br>
                                 {{ $val_cpd->isi_catatan }}
                             </i><br>
                             @endforeach
@@ -137,6 +137,15 @@
                     </div>
                 </div>
             </div>
+            @if ($anggota->penginput->role != 'Admin' && $anggota->status_pendaftaran == 'Pending' || $anggota->status_pendaftaran == 'Diajukan Ulang')
+            <div class="card-footer">
+                <form action="{{ route('admin.anggota.approve',$anggota->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Apakah yakin ingin menerima anggota {{ $anggota->nama_lengkap }} ?')">Diterima</button>
+                </form>
+                <a href="javascript:void(0)" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ModalDitolak">Ditolak</a>
+            </div>
+            @endif
         </div>
     </div>
 </div>
@@ -146,3 +155,34 @@
 <li class="breadcrumb-item"><a href="{{ route('admin.anggota.index') }}">List Data</a></li>
 <li class="breadcrumb-item active">Detail</li>
 @endpush
+
+@if ($anggota->penginput->role != 'Admin' && $anggota->status_pendaftaran == 'Pending' || $anggota->status_pendaftaran == 'Diajukan Ulang')
+@push('modal')
+<!-- Modal Mendefisinikan Kantor -->
+<div class="modal fade" id="ModalDitolak" tabindex="-1" aria-labelledby="ModalDitolakLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalDitolakLabel">Catatan Ditolak</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin.anggota.reject',$anggota->id) }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label>Isi Catatan <span class="text-danger">*</span></label>
+                        <textarea name="isi_catatan" class="form-control @error('isi_catatan') is-invalid @enderror" cols="5" rows="5" placeholder="Catatan Ditolak...">{{ @old('isi_catatan') }}</textarea>
+                        @error('isi_catatan')<div class="invalid-feedback">{{ $message }}</span></div>@enderror
+                    </div>
+
+                    <button type="submit" class="btn btn-sm btn-primary shadow-sm">Lanjtkan</button>
+                    <button type="button" class="btn btn-sm btn-secondary shadow-sm" data-dismiss="modal">Batal</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endpush
+@endif

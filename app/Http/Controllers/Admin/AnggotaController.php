@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Anggota;
+use App\Models\CatatanPendaftaranDitolak;
 use App\Models\JenisUsaha;
 use App\Models\Kota;
 use App\Models\Majlis;
@@ -164,5 +165,37 @@ class AnggotaController extends Controller
             'status_pendaftaran' => 'Diterima'
         ]);
         return back()->with('success','Berhasil menerima anggota '.$anggota->nama_lengkap);
+    }
+
+    public function approve(string $id)
+    {
+        $anggota = Anggota::findOrFail($id);
+        $anggota->update([
+            'status_pendaftaran' => 'Diterima',
+            'is_aktif' => true,
+        ]);
+        return back()->with('success',$anggota->nama_lengkap. ' berhasil diterima sebagai anggota');
+    }
+
+    public function reject(Request $request, string $id)
+    {
+        $validator = Validator::make($request->all(), [
+            "isi_catatan" => ["required"],
+        ]);
+        if ($validator->fails()) {
+            return back()->with('error','Gagal !')->withErrors($validator)->withInput();
+        }
+        CatatanPendaftaranDitolak::create([
+            'anggota_id' => $id,
+            'isi_catatan' => $request->isi_catatan,
+            'tanggal_ditolak' => date('Y-m-d',time()),
+        ]);
+        $anggota = Anggota::findOrFail($id);
+        $anggota->status_pendaftaran = 'Ditolak';
+        if($anggota->is_aktif == true){
+            $anggota->is_aktif = false;
+        }
+        $anggota->update();
+        return back()->with('success',$anggota->nama_lengkap.' berhasil ditolak sebagai anggota');
     }
 }
