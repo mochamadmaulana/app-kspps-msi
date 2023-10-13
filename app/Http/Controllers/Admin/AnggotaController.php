@@ -183,7 +183,7 @@ class AnggotaController extends Controller
             "isi_catatan" => ["required"],
         ]);
         if ($validator->fails()) {
-            return back()->with('error','Gagal !')->withErrors($validator)->withInput();
+            return back()->with('error','Gagal mengisi catatan ditolak!')->withErrors($validator)->withInput();
         }
         CatatanPendaftaranDitolak::create([
             'anggota_id' => $id,
