@@ -8,10 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Nasabah extends Authenticatable
+class Anggota extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $table = "nasabah";
+    protected $table = "anggota";
     protected $guarded = [];
 
     // protected $fillable = [
@@ -46,5 +46,15 @@ class Nasabah extends Authenticatable
     public function majlis()
     {
         return $this->belongsTo(Majlis::class);
+    }
+
+    public function catatan_pendaftaran_ditolak()
+    {
+        return $this->hasMany(CatatanPendaftaranDitolak::class)->orderBy('tanggal_ditolak','DESC');
+    }
+
+    public function penginput()
+    {
+        return $this->belongsTo(Karyawan::class, 'id_penginput','id');
     }
 }

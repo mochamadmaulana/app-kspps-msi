@@ -158,7 +158,8 @@ class KantorCabangController extends Controller
             ['success'=>'Berhasil menambahkan admin kantor cabang '.$kantor->nama_kantor,
             'nama_kantor' => $kantor->nama_kantor,
             'nik_karyawan'=>$karyawan->no_induk_karyawan,
-            'nama_karyawan'=> $karyawan->nama_lengkap
+            'nama_karyawan'=> $karyawan->nama_lengkap,
+            'password'=> $request->password
         ]);
     }
 }

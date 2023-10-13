@@ -21,8 +21,8 @@ class Kota extends Model
         return $this->hasMany(Karyawan::class);
     }
 
-    function nasabah()
+    function anggota()
     {
-        return $this->hasMany(Nasabah::class);
+        return $this->hasMany(Anggota::class);
     }
 }

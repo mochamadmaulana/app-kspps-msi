@@ -29,11 +29,18 @@ class Karyawan extends Authenticatable
                 ->orWhere('nama_lengkap','like','%'.$search.'%')
                 ->orWhere('email','like','%'.$search.'%')
                 ->orWhere('no_telepone','like','%'.$search.'%')
+                ->orWhere('role','like','%'.$search.'%')
                 // ->orWhereHas('kantor',fn($query) =>
                 //     $query->where('nama_kantor','like','%'.$search.'%')
                 // )
         );
     }
+
+    public function scopeAktif(Builder $query) : void
+    {
+        $query->where('is_aktif',true);
+    }
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -51,5 +58,10 @@ class Karyawan extends Authenticatable
     public function kota()
     {
         return $this->belongsTo(Kota::class);
+    }
+
+    public function anggota()
+    {
+        return $this->hasMany(Anggota::class);
     }
 }

@@ -1,15 +1,14 @@
-@extends('layouts.admin', ['title' => 'Tambah Nasabah','icon' => 'fas fa-address-book'])
+@extends('layouts.kasie_pembiayaan', ['title' => 'Tambah Anggota','icon' => 'fas fa-address-book'])
 @section('content')
 <div class="card mb-4">
     <div class="card-header">
-        <a href="{{ route('admin.nasabah.index') }}" class="btn btn-sm btn-secondary shadow-sm"><i class="fas fa-arrow-left mr-1"></i> Kembali</a>
+        <a href="{{ route('kasie-pembiayaan.anggota.index') }}" class="btn btn-sm btn-secondary shadow-sm"><i class="fas fa-arrow-left mr-1"></i> Kembali</a>
     </div>
     <div class="card-body">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <form action="{{ route('admin.nasabah.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('kasie-pembiayaan.anggota.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
                     <div class="row">
                         <div class="col-lg-6">
                             <!-- Nama Lengkap -->
@@ -160,7 +159,7 @@
                         <div class="col-lg-6">
                             <!-- Majlis -->
                             <div class="form-group">
-                                <label>Majlis <span class="text-danger">* </span> <a href="{{ route('admin.majlis.create') }}" target="_blank" class="badge badge-primary ml-2"><i class="fas fa-plus"></i> Tambah Majlis</a></label>
+                                <label>Majlis <span class="text-danger">* </span></label>
                                 <select name="majlis" class="form-control @error('majlis') is-invalid @enderror" id="selectMajlis">
                                     <option value="">- pilih -</option>
                                     @foreach ($majlis as $val_majlis)
@@ -208,24 +207,6 @@
                         <label>Alamat <span class="text-danger">*</span></label>
                         <textarea name="alamat" class="form-control @error('alamat') is-invalid @enderror" cols="5" rows="5" placeholder="Alamat...">{{ @old('alamat') }}</textarea>
                         @error('alamat')<div class="invalid-feedback">{{ $message }}</span></div>@enderror
-                    </div>
-
-                    <!-- Password -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Password <span class="text-danger">*</span></label>
-                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ @old('password') }}" placeholder="Password...">
-                                @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Konfirmasi Password <span class="text-danger">*</span></label>
-                                <input type="password" name="konfirmasi_password" class="form-control @error('konfirmasi_password') is-invalid @enderror" value="{{ @old('konfirmasi_password') }}" placeholder="Konfirmasi Password...">
-                                @error('konfirmasi_password')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Foto Identitas (KTP/SIM) -->
@@ -284,7 +265,7 @@
 @endsection
 
 @push('breadcrumb')
-<li class="breadcrumb-item"><a href="{{ route('admin.nasabah.index') }}">List Data</a></li>
+<li class="breadcrumb-item"><a href="{{ route('kasie-pembiayaan.anggota.index') }}">List Data</a></li>
 <li class="breadcrumb-item active">Tambah</li>
 @endpush
 

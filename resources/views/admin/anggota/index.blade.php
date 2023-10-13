@@ -1,14 +1,14 @@
-@extends('layouts.admin', ['title' => 'Nasabah','icon' => 'fas fa-address-book'])
+@extends('layouts.admin', ['title' => 'Anggota','icon' => 'fas fa-address-book'])
 
 @section('content')
 <div class="row mb-5">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('admin.nasabah.create') }}" class="btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus mr-1"></i> Tambah Data</a>
+                <a href="{{ route('admin.anggota.create') }}" class="btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus mr-1"></i> Tambah Data</a>
                 @if (request('search'))
                 <div class="float-right">
-                    <a href="{{ route('admin.nasabah.index') }}" class="btn btn-sm btn-warning"><i class="fas fa-sync-alt mr-1"></i> Refresh</a>
+                    <a href="{{ route('admin.anggota.index') }}" class="btn btn-sm btn-warning"><i class="fas fa-sync-alt mr-1"></i> Refresh</a>
                 </div>
                 @endif
             </div>
@@ -36,14 +36,15 @@
                                 <th>Majlis</th>
                                 <th>No. Tlp</th>
                                 <th>Status</th>
+                                <th>Input</th>
                                 <th><i class="fas fa-cog"></i></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($nasabah->count() > 0)
-                            @foreach ($nasabah as $val)
+                            @if ($anggota->count() > 0)
+                            @foreach ($anggota as $val)
                                 <tr>
-                                    {{-- <td>{{ $nasabah->count() * ($nasabah->currentPage() - 1) + $loop->iteration }}</td> --}}
+                                    {{-- <td>{{ $anggota->count() * ($anggota->currentPage() - 1) + $loop->iteration }}</td> --}}
                                     <td>{{ $val->no_pendaftaran }}</td>
                                     <td>
                                         @if ($val->jenis_identitas == 'KTP')
@@ -57,15 +58,16 @@
                                     <td>{{ $val->no_telepone }}</td>
                                     <td>
                                         @if ($val->status_pendaftaran == 'Pending')
-                                            <span class="badge badge-info"><i class="fas fa-spinner mr-1"></i> {{ $val->status_pendaftaran }}</span>
+                                        <span class="badge badge-info"><i class="fas fa-spinner mr-1"></i> {{ $val->status_pendaftaran }}</span>
                                         @elseif ($val->status_pendaftaran == 'Survei')
-                                            <span class="badge badge-warning"><i class="fas fa-clock mr-1"></i> {{ $val->status_pendaftaran }}</span>
+                                        <span class="badge badge-warning"><i class="fas fa-clock mr-1"></i> {{ $val->status_pendaftaran }}</span>
                                         @elseif ($val->status_pendaftaran == 'Ditolak')
-                                            <span class="badge badge-danger"><i class="fas fa-ban mr-1"></i> {{ $val->status_pendaftaran }}</span>
+                                        <span class="badge badge-danger"><i class="fas fa-ban mr-1"></i> {{ $val->status_pendaftaran }}</span>
                                         @else
-                                            <span class="badge badge-success"><i class="fas fa-check-double mr-1"></i> {{ $val->status_pendaftaran }}</span>
+                                        <span class="badge badge-success"><i class="fas fa-check-double mr-1"></i> {{ $val->status_pendaftaran }}</span>
                                         @endif
                                     </td>
+                                    <td>{{ $val->penginput->nama_lengkap }}</td>
                                     <td>
                                         <div class="btn-group dropleft">
                                             <button type="button" class="btn btn-xs btn-secondary dropdown-toggle"
@@ -73,9 +75,11 @@
                                                 <i class="fas fa-cog"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a href="{{ route('admin.nasabah.show',$val->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Detail</a>
-                                                <a href="{{ route('admin.nasabah.edit',$val->id) }}" class="dropdown-item"><i class="fas fa-edit"></i> Edit</a>
-                                                <form action="{{ route('admin.nasabah.destroy', $val->id) }}" method="POST" class="d-inline">
+                                                <a href="{{ route('admin.anggota.show',$val->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Detail</a>
+                                                @if ($val->id_penginput == Auth::user()->id)
+                                                <a href="{{ route('admin.anggota.edit',$val->id) }}" class="dropdown-item"><i class="fas fa-edit"></i> Edit</a>
+                                                @endif
+                                                <form action="{{ route('admin.anggota.destroy', $val->id) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="dropdown-item" onclick="return confirm('Apakah yakin ingin menghapus nasabah {{ $val->nama_lengkap }} ?')"><i class="fas fa-trash"></i> Hapus</button>
@@ -95,7 +99,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md">
-                        <span class="float-right">{{ $nasabah->links() }}</span>
+                        <span class="float-right">{{ $anggota->links() }}</span>
                     </div>
                 </div>
             </div>

@@ -17,8 +17,8 @@ class Majlis extends Model
         $query->where('nama_majlis','like','%'.$filters.'%');
     }
 
-    public function nasabah()
+    public function anggota()
     {
-        return $this->hasMany(Nasabah::class);
+        return $this->hasMany(Anggota::class);
     }
 }

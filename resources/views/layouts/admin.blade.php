@@ -141,12 +141,12 @@
 
                         <li class="nav-header">MASTER DATA</li>
 
-                        <!-- Nasabah -->
+                        <!-- Anggota -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.nasabah.index') }}" class="nav-link {{ Request::is('admin/nasabah*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.anggota.index') }}" class="nav-link {{ Request::is('admin/anggota*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-address-book"></i>
                                 <p>
-                                    Nasabah
+                                    Anggota
                                 </p>
                             </a>
                         </li>

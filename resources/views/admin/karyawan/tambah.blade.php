@@ -31,7 +31,6 @@
                             <option value="Staff Lapangan" @if (@old('role') == 'Staff Lapangan') selected @endif>Staff Lapangan</option>
                             <option value="Kasie Pembiayaan" @if (@old('role') == 'Kasie Pembiayaan') selected @endif>Kasie Pembiayaan</option>
                             <option value="Kasie Keuangan" @if (@old('role') == 'Kasie Keuangan') selected @endif>Kasie Keuangan</option>
-                            <option value="Admin" @if (@old('role') == 'Admin') selected @endif>Admin</option>
                         </select>
                         @error('role')<div class="invalid-feedback">{{ $message }}</span></div>@enderror
                     </div>

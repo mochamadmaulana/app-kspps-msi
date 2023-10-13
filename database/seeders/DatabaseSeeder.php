@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             JenisUsahaSeeder::class,
             KantorSeeder::class,
             KaryawanSeeder::class,
+            MajlisSeeder::class,
         ]);
     }
 }

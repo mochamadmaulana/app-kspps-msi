@@ -27,15 +27,18 @@ class AuthController extends Controller
         if(is_numeric($request->nik)){
             echo $request->nik . ' Adalah numeric';
         }else{
-            $karyawan = Karyawan::with('kota','kantor')->where('no_induk_karyawan', $request->nik)->first();
-            if ($karyawan && Hash::check($request->password, $karyawan->password)) {
+            $karyawan = Karyawan::with('kota','kantor')->aktif()->where('no_induk_karyawan', $request->nik)->first();
+            if (!empty($karyawan) && Hash::check($request->password, $karyawan->password)) {
                 if($karyawan->is_aktif == true){
                     // cek role 'Admin', 'Kasie Pembiayaan', 'Kasie Keuangan', 'Staff Lapangan'
                     if ($karyawan->role === 'Admin') {
                         Auth::login($karyawan);
                         return redirect()->route('admin.dashboard')->with('success', 'Login berhasil, Selamat bekerja '.$karyawan->nama_lengkap);
-                    }else {
-                        return back()->with('error', 'Saat ini login hanya dapat dilakukan oleh admin!')->withErrors($validator)->withInput();
+                    }elseif($karyawan->role === 'Kasie Pembiayaan') {
+                        Auth::login($karyawan);
+                        return redirect()->route('kasie-pembiayaan.dashboard')->with('success', 'Login berhasil, Selamat bekerja '.$karyawan->nama_lengkap);
+                    }else{
+                        return back()->with('error', 'Login hanya dapat dilakukan oleh Admin dan Kasie Pembiayaan!');
                     }
                 }else{
                     return back()->with('error', 'Akun belum aktif, harap hubungi admin!')->withErrors($validator)->withInput();

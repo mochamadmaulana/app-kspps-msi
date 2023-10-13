@@ -119,8 +119,8 @@
 
                         <!-- Dashboard -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.dashboard') }}"
-                                class="nav-link {{ (request()->is('admin/dashboard')) ? 'active' : '' }}">
+                            <a href="{{ route('kasie-pembiayaan.dashboard') }}"
+                                class="nav-link {{ (request()->is('kasie-pembiayaan/dashboard')) ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
                                     Dashboard
@@ -159,72 +159,12 @@
                             </ul>
                         </li>
 
-                        <!-- Laporan -->
-                        <li class="nav-item">
-                            <a href="#"
-                                class="nav-link {{ (request()->is('admin/laporan')) ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-file-alt"></i>
-                                <p>
-                                    Laporan
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-header">MASTER DATA</li>
-
                         <!-- Nasabah -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.nasabah.index') }}" class="nav-link {{ Request::is('admin/nasabah*') ? 'active' : '' }}">
+                            <a href="{{ route('kasie-pembiayaan.anggota.index') }}" class="nav-link {{ Request::is('kasie-pembiayaan/anggota*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-address-book"></i>
                                 <p>
-                                    Nasabah
-                                </p>
-                            </a>
-                        </li>
-
-                        <!-- Karyawan -->
-                        <li class="nav-item">
-                            <a href="{{ route('admin.karyawan.index') }}" class="nav-link {{ Request::is('admin/karyawan*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>
-                                    Karyawan
-                                </p>
-                            </a>
-                        </li>
-
-                        @if (Auth::user()->role === 'Admin' && Auth::user()->kantor->is_pusat == true)
-                        <!-- Kantor -->
-                        <li class="nav-item {{ Request::segment(2) == 'kantor' ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ Request::segment(2) == 'kantor' ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-building"></i>
-                                <p>
-                                    Kantor
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.kantor.pusat.index') }}" class="nav-link {{ Request::is('admin/kantor/pusat*') ? 'active' : '' }}">
-                                        <i class="far fa-circle text-sm nav-icon"></i>
-                                        <p>Pusat</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.kantor.cabang.index') }}" class="nav-link {{ Request::is('admin/kantor/cabang*') ? 'active' : '' }}">
-                                        <i class="far fa-circle text-sm nav-icon"></i>
-                                        <p>Cabang</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        @endif
-
-                        <!-- Majelis -->
-                        <li class="nav-item">
-                            <a href="{{ route('admin.majlis.index') }}" class="nav-link {{ Request::is('admin/majlis*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-house-user"></i>
-                                <p>
-                                    Majlis
+                                    Anggota
                                 </p>
                             </a>
                         </li>

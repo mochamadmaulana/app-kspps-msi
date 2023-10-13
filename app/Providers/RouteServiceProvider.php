@@ -44,6 +44,10 @@ class RouteServiceProvider extends ServiceProvider
             // Admin
             Route::middleware('web')
                 ->group(base_path('routes/admin.php'));
+
+            // Kasie Pembiayaan
+            Route::middleware('web')
+            ->group(base_path('routes/kasie_pembiayaan.php'));
         });
     }
 }

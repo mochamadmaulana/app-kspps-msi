@@ -6,6 +6,7 @@
     <h5><i class="fas fa-check mr-1"></i> {{ session('success') }}</h5>
     <span>No. Induk Karyawan : <b><i>{{ session('nik_karyawan') }}</i></b></span><br>
     <span>Nama Admin : <b><i>{{ session('nama_karyawan') }}</i></b></span><br>
+    <span>Password : <b><i>{{ session('password') }}</i></b></span><br>
     <span>Kantor : <b><i>{{ session('nama_kantor') }}</i></b></span><br>
 </div>
 @endif
