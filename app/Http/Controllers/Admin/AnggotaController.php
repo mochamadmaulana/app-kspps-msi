@@ -60,10 +60,14 @@ class AnggotaController extends Controller
             "alamat" => ["required"],
             "nama_ibu_kandung" => ["required"],
             "jenis_usaha" => ["required"],
-            "foto_identitas" => ["required","file","mimes:png,jpg,jpeg","max:1024"],
-            'foto_kk' => ['required','file','mimes:png,jpg,jpeg','max:1024'],
-            'bukti_bayar_pendaftaran' => ['required','file','mimes:png,jpg,jpeg','max:1024'],
-            'foto_usaha' => ['required','file','mimes:png,jpg,jpeg','max:1024'],
+            "foto_identitas" => ["required","file","mimes:png,jpg,jpeg"],
+            'foto_kk' => ['required','file','mimes:png,jpg,jpeg'],
+            'bukti_bayar_pendaftaran' => ['required','file','mimes:png,jpg,jpeg'],
+            'foto_usaha' => ['required','file','mimes:png,jpg,jpeg'],
+            // "foto_identitas" => ["required","file","mimes:png,jpg,jpeg","max:1024"],
+            // 'foto_kk' => ['required','file','mimes:png,jpg,jpeg','max:1024'],
+            // 'bukti_bayar_pendaftaran' => ['required','file','mimes:png,jpg,jpeg','max:1024'],
+            // 'foto_usaha' => ['required','file','mimes:png,jpg,jpeg','max:1024'],
         ]);
         if ($validator->fails()) {
             return back()->with('error','Gagal menambahkan anggota!')->withErrors($validator)->withInput();
